@@ -21,7 +21,7 @@ To run the container, it is necesary to mount two bind volumes so that the ouput
 
 Tested scripts for script_name environment variable currently are:
 - [x] `image_segmentation` - Tested
-- [ ] `swapper` - Not Tested
+- [x] `swapper` - Not Tested
 - [ ] `get_image` - Not Tested.
 - [ ] `video_swapper` - Not Tested.
 
@@ -53,14 +53,61 @@ apt-get update -y && \
     libxext6
 ```
 
-#### How To Use
+### Examples
 
 Every script has it's own help menu and you can trigger it by running the script with
-the --help flag
-
-run the scripts from the `/src/bin` directory.
+the --help flag, below is the output of each of the scripts.
 
 Usable Scripts:
 - `image_segmentation`
-- `download_image`
 - `swapper`
+
+
+Options for `image_segmentation` script, this takes image name from any image on `images` folder and applies some asciification depending on given arguments.
+```
+usage: image_segmentation [-h] [--scale-factor 0.05] [--char-width 9] [--char-height 9] [--color COLOR [COLOR ...]] [--superimpose {yes,no}] image {white,black} 0 0 0 0 [0 0 0 0 ...] 57 png
+
+Does some image segmentation on coordinates, and users swapper functionality and thats it.
+
+positional arguments:
+  image                 [INFO] Image location relative.
+  {white,black}         [INFO] select choice - white or black.
+  0 0 0 0               [INFO] Coordenates to crop, left, upper, right, lower
+  57                    [INFO] Threshold for white and black images
+  png                   [INFO] Image output format
+
+options:
+  -h, --help            show this help message and exit
+  --scale-factor 0.05   [INFO] scale factor for swapper
+  --char-width 9        [INFO] char width for swapper
+  --char-height 9       [INFO] char height for swapper
+  --color COLOR [COLOR ...]
+                        [INFO] Color for the rendering defaults to 0 0 0
+  --superimpose {yes,no}
+                        To superimpose the image back onto
+```
+Options for `swapper` script, scripts takes all images and asciifies them
+
+```
+usage: swapper [-h] [-c 69 [69 ...]] [-cw 18] [-ch 9] [-sf 0.18] [-l arabic] [-fs 19] [-sw 2] [-nc yes]
+
+options:
+  -h, --help            show this help message and exit
+  -c 69 [69 ...], --color 69 [69 ...]
+                        [INFO] The color for the picture, represented by RGB specification, eg: --color 255 255 255 -- defaults to 0 0 0 (black)
+  -cw 18, --char-width 18
+                        [INFO] The width of the characters, eg: --char-width 18 -- defaults to 9
+  -ch 9, --char-height 9
+                        [INFO] The height of the character, eg: --char-height 9 -- defaults to 9
+  -sf 0.18, --scale-factor 0.18
+                        [INFO] Scale factor of the image, eg: 0.20 -- defaults to 0.18
+  -l arabic, --language arabic
+                        [INFO] Language for the characters, eg: arabic -- defaults to standard
+  -fs 19, --font-size 19
+                        [INFO] Font size for unicode, cyrillic and arabic languages only.
+  -sw 2, --stroke-width 2
+                        [INFO] The value for the width of the text stroke
+  -nc yes, --no-color yes
+                        [INFO] User original rgb colors
+
+```
