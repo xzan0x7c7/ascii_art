@@ -18,5 +18,8 @@ else
     'swapper')
         cd /src/bin && python3 swapper "$@"
     ;;
+    'make_gif')
+        cd /src/bin && python3 make_gif "$@"
+    ;;
   esac 
  fi
