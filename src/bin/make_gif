@@ -36,7 +36,13 @@ def make_gif(args, frame_folder):
         convert_to_jpeg(image, args.gifsize)
     
     frames = []
-    for image in os.listdir(frame_folder):
+    for image in sorted(
+            glob.glob(
+                os.path.join(
+                    frame_folder, "*-giffy.jpeg"
+                )
+            )
+        ):
         if "giffy" in image:
             logger.info("[make_gif] loading %s into gif" % image)
             image = os.path.join(frame_folder, image)
